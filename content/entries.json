@@ -1,0 +1,92 @@
+[
+  {
+    "id": "001",
+    "slug": "affordance",
+    "type": "Concept",
+    "title": "Affordance",
+    "desc": "A signal that tells the user what action is possible — without needing instruction.",
+    "tags": ["ux-ui"],
+    "body": "An affordance is a property of an object or interface element that communicates how it should be used. A door handle affords pulling. A button affords pressing. The concept was introduced by psychologist James Gibson and later applied to design by Don Norman in The Design of Everyday Things.\n\nIn digital interfaces, affordances are mostly visual — a raised button looks pressable, an underlined word looks clickable. When affordances are missing or misleading, users hesitate, make errors, or give up.\n\n**Why it matters:** Every time a user has to stop and think 'can I click this?', an affordance has failed. Good affordances make the right action feel obvious.\n\n**Example:** A text input field with a visible border and a blinking cursor affords typing. A flat label with no border does not — even if it is technically editable."
+  },
+  {
+    "id": "002",
+    "slug": "cognitive-load",
+    "type": "Term",
+    "title": "Cognitive load",
+    "desc": "The mental effort required to process and use an interface. Less is almost always better.",
+    "tags": ["ux-ui"],
+    "body": "Cognitive load refers to the total amount of mental effort a user has to exert to understand and operate an interface. It comes from cognitive psychology — specifically John Sweller's work in the 1980s — and has become a foundational principle in UX design.\n\nThere are three types: intrinsic load (the inherent complexity of the task), extraneous load (complexity added by poor design), and germane load (effort that builds useful mental models). Good design reduces extraneous load.\n\n**Why it matters:** Users have a limited mental bandwidth. Every unnecessary decision, label, animation, or option consumes some of it. When cognitive load is too high, users make mistakes, feel frustrated, or abandon the task entirely.\n\n**Example:** A form that asks for 12 fields when 4 would do, uses jargon in its labels, and shows all error messages at once has high cognitive load. A form that shows one question at a time, uses plain language, and validates inline has low cognitive load."
+  },
+  {
+    "id": "003",
+    "slug": "mental-model",
+    "type": "Method",
+    "title": "Mental model",
+    "desc": "The internal picture a user builds of how a system works — not how it actually works.",
+    "tags": ["ux-ui"],
+    "body": "A mental model is the internal representation a person builds in their head of how something works. It is based on past experience, analogies, and observation — not on technical reality. Users interact with your interface based on their mental model, not yours.\n\nThe job of a UX designer is to understand users' existing mental models and either design to match them, or help users build accurate new ones.\n\n**Why it matters:** When an interface violates a user's mental model, confusion follows. If your app calls something a 'workspace' but the user thinks of it as a 'project', they will struggle to find things — even if the functionality is identical.\n\n**Example:** Most users have a mental model of email as a physical letter — it goes to one person, it sits in a inbox, you reply to it. Designers of early email apps leaned into this metaphor deliberately. Slack challenged it by introducing channels, which required users to build a new mental model."
+  },
+  {
+    "id": "004",
+    "slug": "role-prompting",
+    "type": "Prompt pattern",
+    "title": "Role prompting",
+    "desc": "Priming the AI with a persona to shape its tone and level of expertise.",
+    "tags": ["ai-prompting"],
+    "body": "Role prompting means opening your prompt by assigning the AI a specific identity or expertise. This shapes how it frames its response — the vocabulary it uses, the assumptions it makes, the depth it goes to.\n\nThe pattern looks like: 'You are a [role] with expertise in [domain]. [Your actual request].'\n\n**Why it matters:** A general question gets a general answer. The same question asked of 'a senior UX designer who has worked on enterprise SaaS products for 10 years' gets a more specific, more useful answer — because the model adjusts its framing to match the persona.\n\n**Example:**\n- Weak: 'How should I design this form?'\n- Strong: 'You are a UX designer specialising in reducing form abandonment. Review this checkout flow and identify the three highest-friction points.'\n\n**Watch out for:** Overloading the role with too many attributes. One clear, specific role works better than 'you are a world-class expert genius designer researcher developer'."
+  },
+  {
+    "id": "005",
+    "slug": "chain-of-thought",
+    "type": "Prompt pattern",
+    "title": "Chain of thought",
+    "desc": "Asking the model to reason step by step before giving a final answer.",
+    "tags": ["ai-prompting"],
+    "body": "Chain of thought prompting instructs the AI to show its reasoning process before arriving at a conclusion. Rather than jumping straight to an answer, the model works through intermediate steps — which tends to produce more accurate and more trustworthy outputs.\n\nThe simplest version is appending 'Think step by step' to your prompt. More deliberate versions ask the model to outline its reasoning, identify assumptions, or consider alternatives before concluding.\n\n**Why it matters:** For complex problems — logic, analysis, multi-step decisions — an AI that skips straight to an answer is more likely to be confidently wrong. Showing the reasoning lets you spot where it went off track.\n\n**Example:**\n- Without: 'Which of these two designs is better?'\n- With: 'Compare these two designs step by step — first evaluate information hierarchy, then visual clarity, then likely user behaviour. Then give your recommendation.'\n\n**Related:** This is one of the most well-researched prompting techniques. It consistently improves performance on reasoning tasks."
+  },
+  {
+    "id": "006",
+    "slug": "information-hierarchy",
+    "type": "Term",
+    "title": "Information hierarchy",
+    "desc": "The visual order in which content is presented to guide the user's eye.",
+    "tags": ["ux-ui", "web-dev"],
+    "body": "Information hierarchy is the deliberate organisation of visual elements so that the most important information is noticed first, and secondary information follows in a logical order. It is created through size, weight, colour, contrast, spacing and position.\n\nA strong hierarchy means a user can scan a page in seconds and understand what it is, what the key actions are, and where to look next. A weak hierarchy makes everything feel equally important — which means nothing stands out.\n\n**Why it matters:** Users don't read interfaces, they scan them. Hierarchy is what makes scanning work. Without it, cognitive load increases and users miss key information.\n\n**Example:** On this page, the entry title is large and serif — it demands attention first. The type label is small, uppercase and ochre — it provides context without competing. The description is smaller and muted — it rewards closer reading. That ordering is hierarchy in action."
+  },
+  {
+    "id": "007",
+    "slug": "context-window",
+    "type": "Concept",
+    "title": "Context window",
+    "desc": "The amount of text an AI can hold in working memory at once — your conversation has a limit.",
+    "tags": ["ai-prompting", "agents"],
+    "body": "The context window is the total amount of text — measured in tokens — that an AI model can process in a single interaction. Everything the model can 'see' at once lives inside this window: your system prompt, the conversation history, any documents you've shared, and the response it is generating.\n\nWhen a conversation exceeds the context window, older content gets dropped. The model doesn't remember it — it genuinely cannot see it anymore.\n\n**Why it matters:** Long conversations with heavy context can start to degrade. The model may seem to 'forget' earlier instructions or lose consistency. Understanding the context window helps you structure conversations and prompts more effectively.\n\n**Practical implications:**\n- Front-load critical instructions — don't bury them deep in a long thread\n- Summarise and restart long conversations rather than letting them run indefinitely\n- When using AI for code, paste only the relevant file — not your entire codebase\n\n**Tokens vs words:** Roughly 1 token ≈ 0.75 words in English. A 200,000 token context window holds around 150,000 words — about two full novels."
+  },
+  {
+    "id": "008",
+    "slug": "semantic-html",
+    "type": "Term",
+    "title": "Semantic HTML",
+    "desc": "Using the right HTML element for what it represents, not just how it looks.",
+    "tags": ["web-dev"],
+    "body": "Semantic HTML means choosing HTML elements based on their meaning — what the content is — rather than their default visual appearance. A heading is a `<h1>`, not a `<div>` styled to look big. A navigation is a `<nav>`, not a `<div class='nav'>`. A button is a `<button>`, not a `<div>` with an onClick.\n\n**Why it matters:** Semantic HTML communicates structure to browsers, search engines, and assistive technologies like screen readers. A screen reader knows that a `<nav>` contains navigation links and can skip to it. It has no idea what a `<div class='nav'>` means.\n\nIt also affects SEO — search engines use semantic structure to understand what a page is about and rank it accordingly.\n\n**Common mistakes:**\n- Using `<div>` for everything instead of `<article>`, `<section>`, `<aside>`, `<header>`, `<footer>`\n- Using `<span>` or `<div>` as buttons because they are easier to style\n- Skipping heading levels (going from `<h1>` straight to `<h4>`)\n\n**Example:** On Scaffold, each knowledge entry is semantically an `<article>`. The site title is an `<h1>`. The filter buttons are real `<button>` elements. None of this affects how it looks — but it makes the site accessible and meaningful to machines."
+  },
+  {
+    "id": "009",
+    "slug": "negative-constraints",
+    "type": "Prompt pattern",
+    "title": "Negative constraints",
+    "desc": "Telling the AI what not to do can be as powerful as telling it what to do.",
+    "tags": ["ai-prompting"],
+    "body": "Negative constraints are explicit instructions about what the AI should avoid in its response. They work alongside positive instructions to narrow the output space — ruling out directions you don't want before the model starts generating.\n\nThe pattern is simple: after stating what you want, add a line beginning with 'Do not...' or 'Avoid...' or 'Do not include...'.\n\n**Why it matters:** AI models default to common patterns. Without constraints, you get the most average, expected version of what you asked for. Negative constraints push the model away from defaults and toward more specific, intentional output.\n\n**Example:**\n- 'Write a short description of this feature. Do not use the words innovative, seamless, or powerful. Do not use exclamation marks. Do not write more than two sentences.'\n\nAll three constraints rule out common AI writing habits — and the result is almost always tighter and more human.\n\n**Related:** Negative constraints are especially useful when you have been burned by a specific bad pattern before. If the AI keeps doing something you don't want, name it explicitly."
+  },
+  {
+    "id": "010",
+    "slug": "mcp-tool-use",
+    "type": "Concept",
+    "title": "MCP / tool use",
+    "desc": "A protocol that lets AI agents connect to external services and take real-world actions.",
+    "tags": ["agents", "ai-prompting"],
+    "body": "Model Context Protocol (MCP) is an open standard that allows AI models to connect to external tools and services — giving them the ability to take actions beyond generating text. Through MCP, an AI can search the web, read files, query databases, send emails, update calendars, and more.\n\nTool use more broadly refers to any mechanism that lets a model call an external function and incorporate the result into its response. MCP is one standardised implementation of this idea.\n\n**Why it matters:** Without tool use, an AI is limited to its training data and your conversation. With tool use, it becomes an agent — something that can interact with the world on your behalf.\n\n**How it works (simplified):**\n1. A tool is described to the model — its name, what it does, and what inputs it needs\n2. When the model decides a tool is relevant, it outputs a structured call\n3. The tool runs and returns a result\n4. The model incorporates the result into its response\n\n**Example:** When Claude searches the web in this conversation, that is tool use. When Claude reads a file you uploaded, that is tool use. MCP makes these integrations standardised so any compatible tool can connect to any compatible model."
+  }
+]
