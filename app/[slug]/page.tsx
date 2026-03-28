@@ -153,18 +153,3 @@ export default async function EntryPage({ params }: { params: Promise<{ slug: st
     </main>
   )
 }
-```
-
----
-
-**Step 5 — Add your API key to Vercel**
-
-Before pushing, you need to add your Anthropic API key as an environment variable so the API route can use it in production:
-
-1. Go to [vercel.com](https://vercel.com) → your Scaffold project → **Settings** → **Environment Variables**
-2. Add a new variable: `ANTHROPIC_API_KEY` = your key
-3. Make sure it's enabled for **Production** and **Preview**
-
-For local dev, create a `.env.local` file in the root of your project:
-```
-ANTHROPIC_API_KEY=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
