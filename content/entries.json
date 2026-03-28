@@ -89,4 +89,94 @@
     "tags": ["agents", "ai-prompting"],
     "body": "Model Context Protocol (MCP) is an open standard that allows AI models to connect to external tools and services — giving them the ability to take actions beyond generating text. Through MCP, an AI can search the web, read files, query databases, send emails, update calendars, and more.\n\nTool use more broadly refers to any mechanism that lets a model call an external function and incorporate the result into its response. MCP is one standardised implementation of this idea.\n\n**Why it matters:** Without tool use, an AI is limited to its training data and your conversation. With tool use, it becomes an agent — something that can interact with the world on your behalf.\n\n**How it works (simplified):**\n1. A tool is described to the model — its name, what it does, and what inputs it needs\n2. When the model decides a tool is relevant, it outputs a structured call\n3. The tool runs and returns a result\n4. The model incorporates the result into its response\n\n**Example:** When Claude searches the web in this conversation, that is tool use. When Claude reads a file you uploaded, that is tool use. MCP makes these integrations standardised so any compatible tool can connect to any compatible model."
   }
+  {
+  "id": "011",
+  "slug": "zero-shot-prompting",
+  "type": "Prompt pattern",
+  "title": "Zero-shot prompting",
+  "desc": "Asking an AI to complete a task without giving it any examples of what a good answer looks like.",
+  "tags": ["ai-prompting"],
+  "body": "**What it means**\n\nZero-shot means you give the model zero examples before asking your question. You just describe the task and trust the model to figure out the format, tone, and approach on its own.\n\nThis is actually how most people use AI by default — you ask a question, you get an answer.\n\n**When it works well**\n\n- Simple, well-defined tasks (\"Summarise this paragraph\")\n- Tasks the model has seen a lot during training (writing, translation, explanation)\n- When you want a quick result and don't need a specific format\n\n**When it falls short**\n\nIf you need output in a very specific structure — a particular JSON shape, a formatted table, a certain writing voice — zero-shot often produces something close but not quite right. That's when few-shot prompting becomes useful: you show the model exactly what you want before asking for it."
+},
+{
+  "id": "012",
+  "slug": "few-shot-prompting",
+  "type": "Prompt pattern",
+  "title": "Few-shot prompting",
+  "desc": "Giving an AI one or more examples of the output you want before asking it to produce something new.",
+  "tags": ["ai-prompting"],
+  "body": "**What it means**\n\nInstead of just describing what you want, you show the model. You provide one, two, or three examples of an ideal input-output pair, then ask the model to follow the same pattern for a new input.\n\n**A simple example**\n\nIf you wanted the model to rewrite product names in a punchy two-word style, you might write:\n\n- Input: Running shoes → Output: Swift Stride\n- Input: Coffee maker → Output: Dawn Brew\n- Input: Yoga mat → Output: ...\n\nThe model now understands the format, the tone, and the length you want — without you having to describe any of it.\n\n**Why it works**\n\nModels are very good at pattern recognition. Examples are often clearer than instructions. Showing beats telling.\n\n**Practical tip**\n\nYou only need 1–3 examples in most cases. More than that rarely improves results and just uses up context."
+},
+{
+  "id": "013",
+  "slug": "role-prompting",
+  "type": "Prompt pattern",
+  "title": "Role prompting",
+  "desc": "Telling an AI to take on a specific role or persona to shape the tone, depth, and framing of its response.",
+  "tags": ["ai-prompting"],
+  "body": "**What it means**\n\nYou open your prompt by assigning the model an identity — \"You are a senior UX designer,\" \"You are a plain-language editor,\" \"You are a sceptical code reviewer.\" This primes the model to respond from that perspective.\n\n**Why it helps**\n\nThe same question answered by a \"junior copywriter\" and a \"brand strategist with 20 years of experience\" will produce meaningfully different responses. The role sets expectations for vocabulary, depth of reasoning, and what the model chooses to prioritise.\n\n**Where it's most useful**\n\n- Getting expert-level framing on a topic you don't know well\n- Setting a consistent tone across a long working session\n- Getting critical feedback — \"You are a harsh but fair editor\" produces more useful critique than just asking for a review\n\n**Limitation**\n\nRole prompting influences style and framing, but it doesn't give the model knowledge it doesn't have. Assigning it the role of a cardiologist won't make its medical output more accurate — it will just sound more medical."
+},
+{
+  "id": "014",
+  "slug": "chain-of-thought",
+  "type": "Prompt pattern",
+  "title": "Chain-of-thought prompting",
+  "desc": "Asking an AI to reason through a problem step by step before giving its final answer, which tends to produce more accurate results.",
+  "tags": ["ai-prompting"],
+  "body": "**What it means**\n\nInstead of asking for an answer directly, you ask the model to show its work — to think out loud before concluding. The simplest version is adding \"think step by step\" to your prompt.\n\n**Why it improves accuracy**\n\nLanguage models generate text token by token. When forced to reason through intermediate steps, each step becomes context for the next one. This matters most for tasks involving logic, maths, multi-step decisions, or anything where jumping straight to an answer leads to errors.\n\n**Example**\n\nWithout chain-of-thought: \"Which of these three options has the lowest total cost?\" — the model might just guess.\n\nWith chain-of-thought: \"Think through the cost of each option step by step, then tell me which is lowest.\" — the model works through each one in sequence, making errors much less likely.\n\n**When to use it**\n\n- Any task involving numbers or logic\n- Decisions with multiple factors to weigh\n- When you want to check the model's reasoning, not just accept its conclusion\n- Debugging — \"Walk me through what this code does line by line\""
+},
+{
+  "id": "015",
+  "slug": "context-window",
+  "type": "Term",
+  "title": "Context window",
+  "desc": "The maximum amount of text an AI model can hold in its working memory at one time — everything it can see and reason about in a single conversation.",
+  "tags": ["ai-prompting"],
+  "body": "**What it means**\n\nEvery AI model has a context window — a fixed upper limit on how much text it can process at once. This includes your messages, the model's replies, any documents you paste in, and system instructions. Once you hit the limit, the model can no longer see the earliest parts of the conversation.\n\n**Why it matters for prompting**\n\nIf you're working on a long task — refining a document across many turns, debugging a large codebase, maintaining a complex conversation — the context window is your constraint. As the conversation grows, older context falls away.\n\n**Practical implications**\n\n- Paste only the relevant parts of a document, not the whole thing\n- For long projects, periodically summarise what's been decided so key context stays present\n- Starting a new conversation resets the window — useful when a thread has become cluttered\n\n**A useful mental model**\n\nThink of it as a desk. The model can only work with what's on the desk right now. The longer the conversation, the more gets pushed off the back edge."
+},
+{
+  "id": "016",
+  "slug": "affordance",
+  "type": "Term",
+  "title": "Affordance",
+  "desc": "A visual property of an element that suggests how it should be used — a button looks pressable, a slider looks draggable.",
+  "tags": ["ux-ui"],
+  "body": "**Origin**\n\nThe term was coined by psychologist James Gibson and popularised in design by Don Norman in The Design of Everyday Things. Norman used it to describe the perceived — not just actual — properties of an object that tell you how to interact with it.\n\n**In digital interfaces**\n\nAffordances are mostly visual cues. A rectangular shape with a subtle shadow looks like a button you can press. Underlined blue text looks like a link you can click. A horizontal bar with a handle looks draggable.\n\nGood affordances mean users don't need to think — they just act.\n\n**When affordances fail**\n\nFlat design trends (lots of white space, minimal borders, ghost buttons) have made affordances harder to read. If a button looks identical to plain text, users may not realise it's interactive.\n\n**Perceived vs actual affordance**\n\n- Perceived affordance: what the user thinks the element can do\n- Actual affordance: what it can really do\n\nThe gap between these two is where confusion lives. A door with a pull handle that you have to push is the classic example — the handle affords pulling, but the mechanism requires pushing."
+},
+{
+  "id": "017",
+  "slug": "visual-hierarchy",
+  "type": "Concept",
+  "title": "Visual hierarchy",
+  "desc": "The arrangement of elements so the eye naturally moves from most important to least important, using size, weight, colour, and spacing as guides.",
+  "tags": ["ux-ui"],
+  "body": "**What it means**\n\nVisual hierarchy is the invisible order a design imposes on the viewer's attention. Without it, everything fights for focus equally — which means nothing gets seen first. With it, the eye has a clear path.\n\n**The main tools**\n\n- **Size** — larger elements read first. A big headline dominates a small caption.\n- **Weight** — bold text reads before regular text at the same size.\n- **Colour** — high contrast and accent colours draw the eye before neutral grey.\n- **Spacing** — isolated elements feel more important than crowded ones.\n- **Position** — top-left reads before bottom-right in most Western layouts.\n\n**A practical test**\n\nSquint at your design until it blurs. What you can still make out is your hierarchy. If the wrong things survive the squint test, the hierarchy needs work.\n\n**In Scaffold's design system**\n\nThis is active in every card: the ochre type label pulls the eye first (colour contrast), the serif title comes next (size and weight), the mono description follows (smaller, grey), and the tag pill reads last (smallest, border only). Each layer has a clear rank."
+},
+{
+  "id": "018",
+  "slug": "mental-model",
+  "type": "Concept",
+  "title": "Mental model",
+  "desc": "The internal picture a user carries of how a system works — often incomplete or wrong, but the reality designers have to design for.",
+  "tags": ["ux-ui"],
+  "body": "**What it means**\n\nA mental model is what a user believes about how something works. It's built from past experience, analogies, and guesswork. It's rarely a perfect match for how the system actually works — but it's what they'll use to make decisions.\n\n**Why it matters**\n\nWhen a design matches the user's mental model, it feels intuitive. When it doesn't, friction appears — the user clicks the wrong thing, gets confused, or gives up.\n\n**A classic example**\n\nEarly users of cloud storage often imagined files still living on their computer and being copied to the cloud. When they deleted a file locally and it disappeared from cloud storage too, they were surprised — because their mental model said the cloud was a separate backup, not a sync.\n\n**Designing for mental models**\n\nYou have two options: match the user's existing mental model, or change it. Matching is almost always cheaper. Changing requires clear onboarding, good error messages, and patience.\n\n**Useful question to ask**\n\nWhat does the user think will happen when they do this action? If your answer doesn't match what actually happens, you have a design problem."
+},
+{
+  "id": "019",
+  "slug": "fitts-law",
+  "type": "Concept",
+  "title": "Fitts's Law",
+  "desc": "A principle stating that the time to click a target depends on how large it is and how far away it is — bigger and closer means faster.",
+  "tags": ["ux-ui"],
+  "body": "**The idea**\n\nFitts's Law is a predictive model from 1954 that holds up surprisingly well in digital design. It says: the time to move to and click a target is a function of the target's size and the distance to it. Bigger targets and shorter distances = faster, easier interaction.\n\n**Practical design implications**\n\n- Make buttons large enough to hit comfortably — especially on mobile where fingers are imprecise\n- Place frequently used controls close to where the user already is\n- Screen edges and corners are effectively infinite targets (you can't overshoot them) — which is why macOS puts the menu bar at the very top edge of the screen\n- Destructive actions (delete, remove) should be smaller or further away — friction is protective here\n\n**On mobile specifically**\n\nFitts's Law becomes critical on touch interfaces. The minimum comfortable tap target is generally considered 44×44px. Anything smaller creates frustration, especially for users with larger fingers or motor impairments.\n\n**The takeaway**\n\nIf users are missing a button, making it bigger or moving it closer will fix the problem faster than changing its label."
+},
+{
+  "id": "020",
+  "slug": "ui-feedback",
+  "type": "Concept",
+  "title": "Feedback (UI)",
+  "desc": "The system's way of telling the user that something happened — a confirmation, a state change, or an error — so they know their action was received.",
+  "tags": ["ux-ui"],
+  "body": "**What it means**\n\nFeedback is the interface talking back. Every time a user does something — clicks, submits, deletes, saves — they need to know it worked. Without feedback, users are left guessing, and guessing leads to repeated actions, anxiety, and distrust.\n\n**Forms of feedback**\n\n- **Visual** — a button changes colour when pressed, a spinner appears while loading, a form field turns red on error\n- **Textual** — \"Your changes have been saved\", \"Invalid email address\"\n- **Motion** — a list item slides out when deleted, a modal shakes when you try to dismiss without completing a required field\n- **Haptic** — a vibration on mobile when an action completes or fails\n\n**The feedback loop**\n\nGood interfaces follow a simple loop: user acts → system responds → user understands result → user acts again. Breaking any part of that loop creates confusion.\n\n**Common failures**\n\n- A button that doesn't visually respond to being clicked (did it register?)\n- A form that submits and nothing happens (did it work?)\n- An error message that says \"Something went wrong\" with no guidance on what to do next\n\n**Response timing matters**\n\nFeedback needs to feel connected to the action. Anything over ~100ms for a visual response starts to feel laggy. Anything over 1 second needs a loading indicator."
+}
 ]
