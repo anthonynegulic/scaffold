@@ -88,7 +88,7 @@
     "desc": "A protocol that lets AI agents connect to external services and take real-world actions.",
     "tags": ["agents", "ai-prompting"],
     "body": "Model Context Protocol (MCP) is an open standard that allows AI models to connect to external tools and services — giving them the ability to take actions beyond generating text. Through MCP, an AI can search the web, read files, query databases, send emails, update calendars, and more.\n\nTool use more broadly refers to any mechanism that lets a model call an external function and incorporate the result into its response. MCP is one standardised implementation of this idea.\n\n**Why it matters:** Without tool use, an AI is limited to its training data and your conversation. With tool use, it becomes an agent — something that can interact with the world on your behalf.\n\n**How it works (simplified):**\n1. A tool is described to the model — its name, what it does, and what inputs it needs\n2. When the model decides a tool is relevant, it outputs a structured call\n3. The tool runs and returns a result\n4. The model incorporates the result into its response\n\n**Example:** When Claude searches the web in this conversation, that is tool use. When Claude reads a file you uploaded, that is tool use. MCP makes these integrations standardised so any compatible tool can connect to any compatible model."
-  }
+  },
   {
   "id": "011",
   "slug": "zero-shot-prompting",
