@@ -11,14 +11,51 @@
   --gray: #888888;
   --border: #E0E0E0;
   --bg: #FFFFFF;
+  --text: #0A0A0A;
+  --hover-bg: #FAFAFA;
+}
+
+[data-theme="dark"] {
+  --bg: #111111;
+  --text: #F0F0F0;
+  --border: #2A2A2A;
+  --gray: #666666;
+  --hover-bg: #1A1A1A;
 }
 
 body {
   font-family: var(--mono);
   background: var(--bg);
-  color: var(--black);
+  color: var(--text);
   -webkit-font-smoothing: antialiased;
 }
+
+.entry-card {
+  transition: background 0.1s;
+}
+
+.entry-card:hover {
+  background: var(--hover-bg);
+}
+
+.theme-toggle {
+  font-family: var(--mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+  background: none;
+  border: 1px solid var(--border);
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.theme-toggle:hover {
+  color: var(--ochre);
+  border-color: var(--ochre);
+}
+
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
