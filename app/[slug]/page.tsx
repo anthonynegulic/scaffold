@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import entries from '../../content/entries.json'
+import registry from '../demos/registry'
 
 export function generateStaticParams() {
   return entries.map(entry => ({ slug: entry.slug }))
@@ -16,6 +17,8 @@ export default async function EntryPage({ params }: { params: Promise<{ slug: st
     e.slug !== entry.slug &&
     e.tags.some(t => entry.tags.includes(t))
   ).slice(0, 3)
+
+  const Demo = registry[entry.slug] || null
 
   return (
     <main style={{ maxWidth: '740px', margin: '0 auto', padding: '0 32px 80px' }}>
@@ -63,7 +66,7 @@ export default async function EntryPage({ params }: { params: Promise<{ slug: st
               <h2 key={i} style={{
                 fontFamily: 'var(--mono)', fontSize: '11px', fontWeight: 500,
                 textTransform: 'uppercase', letterSpacing: '0.1em',
-                color: 'var(--black)', marginBottom: '12px', marginTop: '32px'
+                color: 'var(--text)', marginBottom: '12px', marginTop: '32px'
               }}>
                 {block.replace(/\*\*/g, '')}
               </h2>
@@ -97,6 +100,9 @@ export default async function EntryPage({ params }: { params: Promise<{ slug: st
         })}
       </div>
 
+      {/* Demo — renders only if one exists for this slug */}
+      {Demo && <Demo />}
+
       {/* Tags */}
       <div style={{ display: 'flex', gap: '8px', marginBottom: '64px' }}>
         {entry.tags.map(tag => (
@@ -124,9 +130,9 @@ export default async function EntryPage({ params }: { params: Promise<{ slug: st
             {related.map((r, i) => (
               <Link key={r.id} href={`/${r.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div style={{
-                padding: '18px 16px 18px 0',
-                borderRight: i < related.length - 1 ? '0.5px solid var(--border)' : 'none',
-                borderBottom: '0.5px solid var(--border)'
+                  padding: '18px 16px 18px 0',
+                  borderRight: i < related.length - 1 ? '0.5px solid var(--border)' : 'none',
+                  borderBottom: '0.5px solid var(--border)'
                 }}>
                   <div style={{ fontSize: '9px', textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--ochre)', marginBottom: '6px' }}>
                     {r.type}
@@ -147,3 +153,18 @@ export default async function EntryPage({ params }: { params: Promise<{ slug: st
     </main>
   )
 }
+```
+
+---
+
+**Step 5 — Add your API key to Vercel**
+
+Before pushing, you need to add your Anthropic API key as an environment variable so the API route can use it in production:
+
+1. Go to [vercel.com](https://vercel.com) → your Scaffold project → **Settings** → **Environment Variables**
+2. Add a new variable: `ANTHROPIC_API_KEY` = your key
+3. Make sure it's enabled for **Production** and **Preview**
+
+For local dev, create a `.env.local` file in the root of your project:
+```
+ANTHROPIC_API_KEY=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
